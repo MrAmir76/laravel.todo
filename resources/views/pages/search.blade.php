@@ -3,8 +3,8 @@
 @section('body')
     <x-navbar/>
     @include('livewire.todo-list')
-    <div class="advanceSearch" id="advanceSearch">
+    <div class="advanceSearch" x-data id="advanceSearch"
+         x-ref="advanceSearch" @mousedown.outside="$el.style.display = 'none' ">
         <livewire:Search/>
-        @include('include.script.showSearchScript')
     </div>
 @endsection

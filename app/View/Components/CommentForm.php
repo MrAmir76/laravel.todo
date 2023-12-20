@@ -5,10 +5,9 @@ namespace App\View\Components;
 use App\Http\Requests\Front\CreateCommentTodoRequest;
 use App\Models\Todo;
 use App\Models\TodoComments;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\Component;
-use Session;
-
 
 class CommentForm extends Component
 {
@@ -16,10 +15,8 @@ class CommentForm extends Component
 
     public function __construct($id = null)
     {
-
         $this->id = $id;
     }
-
 
     public function saveComment(CreateCommentTodoRequest $request, $id)
     {
@@ -28,17 +25,16 @@ class CommentForm extends Component
         if (Gate::allows('createComment', $todo)) {
             TodoComments::query()->create([
                 'content' => $request['contentComment'],
-                'todo_id' => $id,
-                'user_id' => auth()->user()->id
+                'todo_id' => $id, 'user_id' => auth()->user()->id
             ]);
             return redirect()->route('detailTodo', ['id' => $this->id . '#comment'])
-                ->with('alert','نظر شما ارسال شد');
+                ->with('alert', 'نظر شما ارسال شد');
         } else {
-            return abort(403);
+            abort(403);
         }
     }
 
-    public function render()
+    public function render(): View
     {
         return view('components.custom.comment-form');
     }

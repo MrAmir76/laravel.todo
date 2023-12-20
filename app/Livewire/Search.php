@@ -2,15 +2,24 @@
 
 namespace App\Livewire;
 
+use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
 class Search extends Component
 {
-
     public $inputSearch = '';
     public $scopeSearch = 1;
+    public $showSearchBtn = false;
 
-    public function searchValidate()
+
+    public function updatedInputSearch(): void
+    {
+        $this->showSearchBtn = false;
+        $cleanData = $this->validate(['inputSearch' => 'required|string|min:2']);
+        if ((count($cleanData))) $this->showSearchBtn = true;
+    }
+
+    public function searchValidate(): void
     {
         $this->validate([
             'inputSearch' => 'required|string|min:2',
@@ -20,7 +29,7 @@ class Search extends Component
         $this->redirect(route('search', $redirectParams), 1);
     }
 
-    public function render()
+    public function render(): View
     {
         return view('livewire.search');
     }

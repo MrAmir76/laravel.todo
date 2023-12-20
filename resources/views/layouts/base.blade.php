@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="{{asset('static/css/bs4.css')}}">
 </head>
 <body>
-@include('include.alert')
 @yield("body")
 <script src="{{asset('static/js/jq3.2.1.js')}}"></script>
 <script src="{{asset('static/js/bp.js')}}"></script>

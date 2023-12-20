@@ -1,6 +1,9 @@
 <div>
     <nav class="bg-info" style="padding: 10px">
-        <button class="btn btn-danger close_" onclick="closeSearch()">بستن</button>
+        <button class="btn btn-danger close_"
+                @click="$refs.advanceSearch.style.display = 'none'">
+            بستن
+        </button>
         <span class="advanceSearchTitle">جستوجوی وظایف</span>
     </nav>
     <form class=" col-10 mt-30" wire:submit.prevent="searchValidate">
@@ -10,9 +13,12 @@
                 <x-error-form :message="$message"/>
             </div>
             @enderror
-            <input class="form-control col-sm-9 inputSearch" type="search" placeholder="متنی وارد کنید" required
-                   minlength="2" wire:model="inputSearch">
-            <input type="submit" class="btn btn-success mt-2 h40" value="جستوجو">
+            <input class="form-control col-sm-9 inputSearch" type="search"
+                   placeholder="متنی وارد کنید"
+                   required wire:model.live.debounce.1s="inputSearch">
+            @if($showSearchBtn)
+                <input type="submit" class="btn btn-success mt-2 h40" value="جستوجو">
+            @endif
         </div>
         <div class="row p-2">
             @error('scopeSearch')
@@ -40,5 +46,4 @@
             </div>
         </div>
     </form>
-    @include('include.script.closeSearchScript')
 </div>

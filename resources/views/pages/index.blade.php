@@ -9,9 +9,10 @@
     @auth()
         <livewire:AddTodo/>
         <livewire:TodoList/>
-        <div class="advanceSearch" id="advanceSearch">
+        <div class="advanceSearch" x-data id="advanceSearch"
+             x-ref="advanceSearch"
+             @mousedown.outside="$el.style.display = 'none' ">
             <livewire:Search/>
-            @include('include.script.showSearchScript')
         </div>
     @else
         <div class="loginRequired"></div>

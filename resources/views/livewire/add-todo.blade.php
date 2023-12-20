@@ -1,5 +1,5 @@
 <div class="card p-1 mb-5">@php($user = auth()->user())
-
+    @include('include.alert')
     <div class="card-header font-weight-bold mb-3">
         افزودن وظیفه جدید
         <button class="float-left btn-outline-danger close-btn"

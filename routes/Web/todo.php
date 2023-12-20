@@ -4,6 +4,7 @@ use App\Http\Controllers\Front\DetailTodo;
 use App\Http\Controllers\Front\Search;
 use App\Livewire\AddTodo;
 use App\View\Components\CommentForm;
+use Illuminate\Support\Facades\Route;
 
 Route::pattern('searchInput', '\w+');
 

@@ -1,4 +1,5 @@
 <div class="m-auto" style="width: 95%">@php($user = auth()->user())
+    @include('include.alert')
     <div class="card-header" style="height: 56px;margin-top: 5px">
         <h5 class="float-right">جزئیات وظیفه شماره
             {{$id}}

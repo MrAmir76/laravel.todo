@@ -5,7 +5,11 @@
         </li>
     @endcan
     <li class="nav-item">
-        <a class="nav-link btn" onclick="showSearch()">جستوجو</a>
+        <a class="nav-link btn"
+           x-data="{ sowSearch: ()=>{document.getElementById('advanceSearch').style.display ='block'} }"
+           @click="sowSearch()">
+            جستوجو
+        </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{route('logout')}}">خروج</a>

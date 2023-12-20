@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Front\HomeController;
-use App\View\Components\CreateTodo;
 use Illuminate\Support\Facades\Route;
 
 Route::pattern('id', '^[0-9]{1,}$');

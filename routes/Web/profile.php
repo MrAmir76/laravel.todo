@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Front\ProfileController;
 use App\Http\Controllers\Front\UserController;
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('account')->middleware(['auth', 'verified'])->group(function () {
 

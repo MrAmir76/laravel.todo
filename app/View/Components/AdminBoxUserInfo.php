@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class AdminBoxUserInfo extends Component
@@ -18,7 +19,7 @@ class AdminBoxUserInfo extends Component
         $this->created = $created;
     }
 
-    public function render()
+    public function render(): View
     {
         return view('components.custom.admin.admin-box-user-info');
     }

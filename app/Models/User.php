@@ -8,11 +8,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property $admin
+ * @property $id
+ */
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $guarded = ['id','created_at','updated_at'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $hidden = ['password', 'remember_token'];
 

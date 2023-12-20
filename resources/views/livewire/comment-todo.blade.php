@@ -1,4 +1,5 @@
 <div class="card m-auto" style="width: 95%" id="comment">
+    @include('include.alert')
     <div class="card-header">
         <h5>گفتوگوی های پیرامون این وظیفه</h5>
     </div>
