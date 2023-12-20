@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api\V1;
 class ProfileEditRequest extends BaseRequest
 {
 
-    public function rules()
+    public function rules(): array
     {
         return
             [

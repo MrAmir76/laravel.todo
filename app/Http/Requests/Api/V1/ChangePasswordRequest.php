@@ -2,12 +2,11 @@
 
 namespace App\Http\Requests\Api\V1;
 
-
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class ChangePasswordRequest extends BaseRequest
 {
-    public function rules()
+    public function rules(): array
     {
         return [
             'current_password' => [
@@ -23,7 +22,7 @@ class ChangePasswordRequest extends BaseRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'password.confirmed' => 'تکرار رمزعبور صحیح نمی باشد'

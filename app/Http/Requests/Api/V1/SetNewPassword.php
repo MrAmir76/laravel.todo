@@ -5,7 +5,7 @@ namespace App\Http\Requests\Api\V1;
 
 class SetNewPassword extends BaseRequest
 {
-    public function rules()
+    public function rules(): array
     {
         return [
             'email' => 'required|email',
@@ -14,7 +14,7 @@ class SetNewPassword extends BaseRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'password.confirmed' => 'تکرار رمزعبور صحیح نمی باشد'

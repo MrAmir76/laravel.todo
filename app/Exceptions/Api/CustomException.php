@@ -3,13 +3,14 @@
 namespace App\Exceptions\Api;
 
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Throwable;
 
 class CustomException extends Exception
 {
 
-    public static function baseException(Request $request, Throwable $exception, $statusCode, $message)
+    public static function baseException(Request $request, Throwable $exception, $statusCode, $message): JsonResponse
     {
         return response()->json(
             [

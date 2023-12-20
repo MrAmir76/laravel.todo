@@ -27,7 +27,7 @@ class OtpCodeEmail extends Mailable
     }
 
 
-    public function content()
+    public function content(): Content
     {
         $data = [
             'time' => $this->deadline,

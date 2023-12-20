@@ -6,7 +6,7 @@ use App\Models\User;
 
 class RegisterRequest extends BaseRequest
 {
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => ['required', 'string', 'min:3', 'max:255'],

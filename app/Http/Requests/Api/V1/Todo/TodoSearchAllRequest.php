@@ -20,7 +20,7 @@ class TodoSearchAllRequest extends BaseRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'scopeSearch.in' => 'حوزه جستوجوی ارسالی صحیح نمی باشد',

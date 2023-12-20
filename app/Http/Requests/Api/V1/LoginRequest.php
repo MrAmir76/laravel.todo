@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\Api\V1;
 
-class loginRequest extends BaseRequest
+class LoginRequest extends BaseRequest
 {
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'email' => ['required', 'string', 'email'],

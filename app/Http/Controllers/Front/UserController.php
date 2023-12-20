@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Front\UpdateUserUnVerifyRequest;
 use App\Http\Requests\Front\UpdateUserVerifyRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
@@ -25,26 +26,24 @@ class UserController extends Controller
     public function updateUserUnVerify(UpdateUserUnVerifyRequest $request)
     {
         if (Gate::allows('isAdmin')) {
-            $id = ((\Crypt::decrypt($request['id'])) - 1) / 2;
+            $id = ((Crypt::decrypt($request['id'])) - 1) / 2;
             $user = User::query()->findOrFail($id);
             $cleanData =
                 ['name' => $request['name'], 'email' => $request['email'], 'admin' => boolval($request['isAdmin'])];
 
-            if (boolval($request['verifyAccount'])) $cleanData += ['email_verified_at' => now('Asia/Tehran')];
+            if ($request['verifyAccount']) $cleanData += ['email_verified_at' => now('Asia/Tehran')];
 
             $user->update($cleanData);
             return redirect()->back()->with('alert', 'کاربر بروزرسانی شد');
         } else {
             return abort(403);
         }
-
-
     }
 
     public function updateUserVerify(UpdateUserVerifyRequest $request)
     {
         if (Gate::allows('isAdmin')) {
-            $id = ((\Crypt::decrypt($request['id'])) - 1) / 2;
+            $id = ((Crypt::decrypt($request['id'])) - 1) / 2;
             $user = User::query()->findOrFail($id);
             $cleanData =
                 ['name' => $request['name'], 'email' => $request['email'], 'admin' => boolval($request['isAdmin'])];

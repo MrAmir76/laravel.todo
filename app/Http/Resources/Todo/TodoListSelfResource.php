@@ -22,5 +22,4 @@ class TodoListSelfResource extends JsonResource
             'created_at' => Jalali::convert($this->created_at)
         ];
     }
-
 }

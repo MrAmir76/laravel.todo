@@ -3,12 +3,14 @@
 namespace App\Http\Resources;
 
 use App\Http\Controllers\Api\V1\BaseApiController;
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use JsonSerializable;
 
 class SuccessRegisterResource extends JsonResource
 {
-    public function toArray(Request $request)
+    public function toArray(Request $request): array|JsonSerializable|Arrayable
     {
         $resource_data = [
             'name' => $this->name,

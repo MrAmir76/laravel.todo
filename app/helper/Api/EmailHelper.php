@@ -29,7 +29,7 @@ class EmailHelper
         $this->subject = $subject;
     }
 
-    public function SendOtpCode()
+    public function SendOtpCode(): void
     {
 
         DB::transaction(function () use (&$created_at) {

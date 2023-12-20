@@ -5,13 +5,13 @@ namespace App\helper;
 class Jalali
 {
     // string_time example: 2023-08-02 12:07:59
-    public static function convert1($str_time)
+    public static function convert1($str_time): string
 
     {
         return explode(' ', self::convert($str_time))[1];
     }
 
-    public static function convert($str_time)
+    public static function convert($str_time): string
 
     {
         $datetime_list = explode(' ', $str_time); //["2023-08-02" ,"12:07:59"]
@@ -48,7 +48,7 @@ class Jalali
         return ($mod == '') ? array($jy, $jm, $jd) : $jy . $mod . $jm . $mod . $jd;
     }
 
-    private static function tr_num($str, $mod = 'en', $mf = '٫')
+    private static function tr_num($str, $mod = 'en', $mf = '٫'): array|string
     {
         $num_a = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.');
         $key_a = array('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹', $mf);

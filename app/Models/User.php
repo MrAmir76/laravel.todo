@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 /**
  * @property $admin
  * @property $id
+ * @property $password
  */
 class User extends Authenticatable implements MustVerifyEmail
 {

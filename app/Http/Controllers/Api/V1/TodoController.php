@@ -2,29 +2,27 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Requests\Api\V1\Todo\AdminSearchTodoListRequest;
+
 use App\Http\Requests\Api\V1\Todo\CommentAddRequest;
-use App\Http\Requests\Api\V1\Todo\SelfSearchTodoListRequest;
 use App\Http\Requests\Api\V1\Todo\TodoAddRequest;
 use App\Http\Requests\Api\V1\Todo\TodoAdminUpdateRequest;
 use App\Http\Requests\Api\V1\Todo\TodoSearchAllRequest;
 use App\Http\Requests\Api\V1\Todo\TodoSearchSelfRequest;
 use App\Http\Requests\Api\V1\Todo\TodoUpdateRequest;
-use App\Http\Resources\Todo\AallTodoListResourceCollection;
 use App\Http\Resources\Todo\CommentResource;
 use App\Http\Resources\Todo\DetailTodoResource;
-use App\Http\Resources\Todo\SelfTodoListResourceCollection;
 use App\Http\Resources\Todo\TodoListAllResource;
 use App\Http\Resources\Todo\TodoListSelfResource;
 use App\Models\Todo;
 use App\Models\TodoComments;
 use App\Models\User;
-use Gate;
+use Illuminate\Support\Facades\Gate;
 
 class TodoController extends BaseApiController
 {
 
-    public $additional = ['status' => 'success', 'message' => 'لیست وظایف ارسال شد'];
+    public array $additional =
+        ['status' => 'success', 'message' => 'لیست وظایف ارسال شد'];
 
     public function todoSearchAll(TodoSearchAllRequest $request)
     {
@@ -128,7 +126,7 @@ class TodoController extends BaseApiController
 
     public function todoUpdate(TodoUpdateRequest $request)
     {
-        $todo = Todo::query()->findOrFail($request['todo_id']);;
+        $todo = Todo::query()->findOrFail($request['todo_id']);
         $todo->update(['result' => $request['resultSelf']]);
         return BaseApiController::successResponse(200, 'مسئولیت انتخابی بروزرسانی شد');
 
