@@ -1,0 +1,1555 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Todo App API",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/v1/todo/search/all": {
+            "post": {
+                "tags": [
+                    "Search"
+                ],
+                "summary": "search in all todos [Login Required]",
+                "operationId": "AllSearchTodo",
+                "requestBody": {
+                    "description": "Search Todo",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "inputSearch": {
+                                        "type": "string",
+                                        "example": "Recusandae"
+                                    },
+                                    "scopeSearch": {
+                                        "type": "string",
+                                        "enum": [
+                                            "user_email",
+                                            "user_name",
+                                            "todo_title",
+                                            "todo_content",
+                                            "todo_finally_result",
+                                            "todo_finally_status"
+                                        ],
+                                        "example": "todo_title"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Todoes send successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "نتایج ارسال شد"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/TodoAllResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Links"
+                                            }
+                                        },
+                                        "meta": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Meta"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "اطلاعات وارد شده نامعتبر است"
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "scopeSearch": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "متن خطای مربوط به این فیلد"
+                                                    }
+                                                },
+                                                "inputSearch": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "متن خطای مربوط به این فیلد"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/todo/search/self": {
+            "post": {
+                "tags": [
+                    "Search"
+                ],
+                "summary": "search in self todos [Login Required]",
+                "operationId": "SelfSearchTodo",
+                "requestBody": {
+                    "description": "Search Todo",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "inputSearch": {
+                                        "type": "string",
+                                        "example": "Recusandae"
+                                    },
+                                    "scopeSearch": {
+                                        "type": "string",
+                                        "enum": [
+                                            "user_email",
+                                            "user_name",
+                                            "todo_title",
+                                            "todo_content",
+                                            "todo_finally_result",
+                                            "todo_finally_status"
+                                        ],
+                                        "example": "todo_title"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Todoes send successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "true"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "نتایج ارسال شد"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/TodoSelfResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Links"
+                                            }
+                                        },
+                                        "meta": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Meta"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "اطلاعات وارد شده نامعتبر است"
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "scopeSearch": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "متن خطای مربوط به این فیلد"
+                                                    }
+                                                },
+                                                "inputSearch": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "متن خطای مربوط به این فیلد"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/todo/add": {
+            "post": {
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Add a new Todo [Login Required]",
+                "operationId": "addTodo",
+                "requestBody": {
+                    "description": "Todo details",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "todo-title": {
+                                        "type": "string",
+                                        "minLength": 2,
+                                        "example": "Todo Title"
+                                    },
+                                    "todo-body": {
+                                        "type": "string",
+                                        "minLength": 5,
+                                        "example": "Todo Body"
+                                    },
+                                    "todo-deadline": {
+                                        "type": "integer",
+                                        "maximum": 365,
+                                        "minimum": 1,
+                                        "example": 7
+                                    },
+                                    "resultSelf": {
+                                        "type": "string",
+                                        "minLength": 2,
+                                        "example": "Result Self",
+                                        "nullable": true
+                                    },
+                                    "user_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Todo added successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "مسئولیت جدید اضافه شد"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "اطلاعات وارد شده نامعتبر است"
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "todo-title": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "متن خطای مربوط به این فیلد"
+                                                    }
+                                                },
+                                                "todo-body": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "متن خطای مربوط به این فیلد"
+                                                    }
+                                                },
+                                                "todo-deadline": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "متن خطای مربوط به این فیلد"
+                                                    }
+                                                },
+                                                "resultSelf": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "متن خطای مربوط به این فیلد"
+                                                    }
+                                                },
+                                                "user_id": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "متن خطای مربوط به این فیلد"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/todo/update": {
+            "post": {
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Updated todo by normal user [Login Required]",
+                "operationId": "updateTodo",
+                "requestBody": {
+                    "description": "Todo update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "todo_id": {
+                                        "type": "integer",
+                                        "minLength": 1,
+                                        "example": "20"
+                                    },
+                                    "resultSelf": {
+                                        "type": "string",
+                                        "minLength": 2,
+                                        "example": "This is a selfResult"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Todo updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "مسئولیت بروزرسانی شد"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "چنین مسئولیتی برای بروزرسانی وجود ندارد یا مسولیت بسته شده است"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "اطلاعات وارد شده نامعتبر است"
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "todo-id": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "متن خطای مربوط به این فیلد"
+                                                    }
+                                                },
+                                                "resultSelf": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "متن خطای مربوط به این فیلد"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/todo/updateAdmin": {
+            "post": {
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Updated todo by admin user [Login Required]",
+                "operationId": "adminUpdateTodo",
+                "requestBody": {
+                    "description": "Todo update",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "todo_id": {
+                                        "type": "integer",
+                                        "minimum": 1,
+                                        "example": "20"
+                                    },
+                                    "todo-title": {
+                                        "type": "string",
+                                        "minLength": 2,
+                                        "example": "Test title"
+                                    },
+                                    "todo-body": {
+                                        "type": "string",
+                                        "minLength": 5,
+                                        "example": "Test Body"
+                                    },
+                                    "todo-deadline": {
+                                        "type": "integer",
+                                        "minimum": 1,
+                                        "example": "6"
+                                    },
+                                    "resultSelf": {
+                                        "type": "string",
+                                        "minLength": 2,
+                                        "example": "This is a selfResult"
+                                    },
+                                    "finally-result": {
+                                        "type": "string",
+                                        "minLength": 5,
+                                        "example": "This is a finallyResult"
+                                    },
+                                    "status-finally": {
+                                        "type": "integer",
+                                        "nullable": true
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Todo updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "مسئولیت بروزرسانی شد"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "اطلاعات وارد شده نامعتبر است"
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "todo-id": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "متن خطای مربوط به این فیلد"
+                                                    }
+                                                },
+                                                "resultSelf": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "متن خطای مربوط به این فیلد"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/todo/list/self": {
+            "get": {
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Get List of Self Todo  [Login Required]",
+                "operationId": "selfTodoList",
+                "responses": {
+                    "200": {
+                        "description": "Send TodoList successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "لیست وظایف ارسال شد"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/TodoSelfResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Links"
+                                            }
+                                        },
+                                        "meta": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Meta"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/todo/list/all": {
+            "get": {
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Get List of all Todo  [Login Required]",
+                "operationId": "allTodoLis",
+                "responses": {
+                    "200": {
+                        "description": "Todoes send successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/TodoAllResource"
+                                            }
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "لیست وظایف ارسال شد"
+                                        },
+                                        "links": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Links"
+                                            }
+                                        },
+                                        "meta": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Meta"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/todo/detail/{id}": {
+            "get": {
+                "tags": [
+                    "Todo"
+                ],
+                "summary": "Get Detail of a Todo [Login Required]",
+                "operationId": "DetailTodo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the Todo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "minimum": 1,
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Todo sent successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/DetailTodoResource"
+                                            }
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "جزئیات وظیفه ارسال شد"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "وظیفه مورد نظر یافت نشد"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/comments/todo/{id}": {
+            "get": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Get list comment of a todo [Login Required]",
+                "operationId": "CommentTodo",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the Todo",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "minimum": 1,
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comment sent successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "لیست نظرات وظیفه مورد نظر ارسال شد"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/CommentTodoResource"
+                                            }
+                                        },
+                                        "links": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Links"
+                                            }
+                                        },
+                                        "meta": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Meta"
+                                            }
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "وظیفه مورد نظر یافت نشد"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/comment/add": {
+            "post": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Adds a new comment for todo [Login Required]",
+                "operationId": "CommentAdd",
+                "requestBody": {
+                    "description": "Add new comment",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "todo_id": {
+                                        "type": "integer",
+                                        "minimum": 1,
+                                        "example": "20"
+                                    },
+                                    "content_comment": {
+                                        "type": "string",
+                                        "minLength": 5,
+                                        "example": "this is test comment."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Comment added successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "example": "نظر شما ثبت شد"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "شما مجوز لازم را ندارید"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "fail"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "اطلاعات وارد شده نامعتبر است"
+                                        },
+                                        "errors": {
+                                            "properties": {
+                                                "todo_id": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "متن خطای مربوط به این فیلد"
+                                                    }
+                                                },
+                                                "content_comment": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string",
+                                                        "example": "متن خطای مربوط به این فیلد"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/comment/{id}": {
+            "delete": {
+                "tags": [
+                    "Comment"
+                ],
+                "summary": "Delete a Comment [Login Required]",
+                "operationId": "CommentDelete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the Comment",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "minimum": 1,
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Comment Deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "example": "نظر شما حذف شد"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthenticated"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFound",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "example": "fail"
+                                        },
+                                        "message": {
+                                            "example": "نظری برای حذف وجود ندارد"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "example": "fail"
+                                        },
+                                        "message": {
+                                            "example": "شما مجوز لازم را ندارید"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Links": {
+                "properties": {
+                    "first": {
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/v1/Address?page=1"
+                    },
+                    "last": {
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/v1/Address?page=10"
+                    },
+                    "prev": {
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/v1/Address?page=4",
+                        "nullable": true
+                    },
+                    "next": {
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/v1/Address?page=5",
+                        "nullable": true
+                    }
+                },
+                "type": "object"
+            },
+            "Meta": {
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "example": "http://127.0.0.1:8000/api/v1/address"
+                    },
+                    "from": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "to": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "current_page": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "last_page": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "per_page": {
+                        "type": "integer",
+                        "example": 5
+                    },
+                    "total": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "properties": {
+                                "url": {
+                                    "type": "string",
+                                    "nullable": true
+                                },
+                                "label": {
+                                    "type": "string"
+                                },
+                                "active": {
+                                    "type": "boolean"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "CommentTodoResource": {
+                "required": [
+                    "comment_id",
+                    "user",
+                    "content",
+                    "created_at"
+                ],
+                "properties": {
+                    "comment_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/UserResource"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "This is test content"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "example": "1400-01-01 12:34:56"
+                    }
+                },
+                "type": "object"
+            },
+            "DetailTodoResource": {
+                "required": [
+                    "todo_id",
+                    "title",
+                    "content",
+                    "deadline",
+                    "user",
+                    "result",
+                    "finally_result",
+                    "finally_status",
+                    "created_at"
+                ],
+                "properties": {
+                    "todo_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Todo title"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "Todo content"
+                    },
+                    "deadline": {
+                        "type": "string",
+                        "example": "2022-01-01"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/UserResource"
+                    },
+                    "result": {
+                        "type": "string",
+                        "example": "Todo result"
+                    },
+                    "finally_result": {
+                        "type": "string",
+                        "example": "Finally result"
+                    },
+                    "finally_status": {
+                        "type": "string",
+                        "enum": [
+                            "شکست خورده",
+                            "موفقیت آمیر",
+                            "نامشخص"
+                        ],
+                        "example": "نامشخص"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "example": "1400-01-01 12:34:56"
+                    }
+                },
+                "type": "object"
+            },
+            "TodoAllResource": {
+                "required": [
+                    "id",
+                    "title",
+                    "deadline",
+                    "result",
+                    "finally_result",
+                    "finally_status",
+                    "user",
+                    "created_at"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Recusandae ipsum autem quia praesentium."
+                    },
+                    "deadline": {
+                        "type": "integer",
+                        "example": 9
+                    },
+                    "result": {
+                        "type": "string",
+                        "example": "Possimus soluta ut et fugit et placeat et aperiam."
+                    },
+                    "finally_result": {
+                        "type": "string",
+                        "example": "Sunt ad et nostrum est corporis."
+                    },
+                    "finally_status": {
+                        "type": "integer",
+                        "example": 0
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/UserResource"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "example": "09:57:04 1402/10/11"
+                    }
+                },
+                "type": "object"
+            },
+            "TodoSelfResource": {
+                "required": [
+                    "id",
+                    "title",
+                    "deadline",
+                    "result",
+                    "finally_result",
+                    "finally_status",
+                    "user",
+                    "created_at"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Recusandae ipsum autem quia praesentium."
+                    },
+                    "deadline": {
+                        "type": "integer",
+                        "example": 9
+                    },
+                    "result": {
+                        "type": "string",
+                        "example": "Possimus soluta ut et fugit et placeat et aperiam."
+                    },
+                    "finally_result": {
+                        "type": "string",
+                        "example": "Sunt ad et nostrum est corporis."
+                    },
+                    "finally_status": {
+                        "type": "integer",
+                        "example": 0
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "example": "09:57:04 1402/10/11"
+                    }
+                },
+                "type": "object"
+            },
+            "UserResource": {
+                "required": [
+                    "id",
+                    "name",
+                    "email"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "admin"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "admin@gmail.com"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter your token:(Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}

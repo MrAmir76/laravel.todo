@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2d97594c-a5ba-425b-b99c-78e8a6fc0712",
+		"_postman_id": "c86c3e6b-a163-436d-9198-f0440502ea05",
 		"name": "Todo App",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,6 +11,9 @@
 				{
 					"name": "login",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -24,7 +27,7 @@
 							"formdata": [
 								{
 									"key": "email",
-									"value": "ali@gmail.com",
+									"value": "admin@gmail.com",
 									"type": "default"
 								},
 								{
@@ -129,7 +132,7 @@
 							"formdata": [
 								{
 									"key": "email",
-									"value": "amir@gmail.com",
+									"value": "admin@gmail.com",
 									"type": "default"
 								}
 							]
@@ -473,7 +476,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/v1/comment/51",
+							"raw": "http://127.0.0.1:8000/api/v1/comment/50",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -486,7 +489,7 @@
 								"api",
 								"v1",
 								"comment",
-								"51"
+								"50"
 							]
 						}
 					},
@@ -576,6 +579,11 @@
 								{
 									"key": "todo-deadline",
 									"value": "5",
+									"type": "default"
+								},
+								{
+									"key": "user_id",
+									"value": "1",
 									"type": "default"
 								}
 							]
@@ -757,7 +765,7 @@
 								},
 								{
 									"key": "resultSelf",
-									"value": "کار درزمان مققر انجام شد",
+									"value": "کار درزمان مقرر انجام شدn",
 									"type": "default"
 								}
 							]
@@ -823,7 +831,7 @@
 								},
 								{
 									"key": "todo-deadline",
-									"value": "5",
+									"value": "1",
 									"type": "default"
 								},
 								{
@@ -833,8 +841,9 @@
 								},
 								{
 									"key": "status-finally",
-									"value": "1",
-									"type": "default"
+									"value": "",
+									"type": "default",
+									"disabled": true
 								},
 								{
 									"key": "resultSelf",
@@ -894,7 +903,7 @@
 							"formdata": [
 								{
 									"key": "inputSearch",
-									"value": "ali",
+									"value": "admin",
 									"type": "default"
 								},
 								{
